@@ -2,8 +2,9 @@
 $binDir = $home + "\Documents\bin"
 New-Alias psedit powershell_ise.exe -Description "edit PS script in PowershellIse"
 New-Alias ep edit-profile -Description "edit Profile"
-New-Alias bin cd-bin -Description "cd to bin folder"
-New-Alias replace-fname $binDir\ReplaceFileName.ps1 -Description "replace FileName(.xlsx,.pptx,.docx,.txt)"
+New-Alias bin cd-bin -Description "move to bin folder"
+New-Alias replace-fname $binDir\ReplaceFileName.ps1 -Description "Replace File name"
+New-Alias find $binDir\Find.ps1 -Description "search files"
 
 function edit-profile { powershell_ise.exe $profile}
 function cd-bin { cd $binDir }

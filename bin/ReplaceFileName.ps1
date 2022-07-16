@@ -9,7 +9,7 @@ $replacedStr = $(Write-Host "’uŠ·Œã‚Ì•¶Žš—ñ‚ð“ü—Í: " -ForeGroundColor Green -NoN
 $files = (Get-ChildItem -Path ".\*")
 foreach ($file in $files) {
     $newName = $file.Name.Replace($targetStr, $replacedStr)
-    Rename-Item -Path $file.FullName -NewName $newName
+    Rename-Item -LiteralPath $file.FullName -NewName $newName
 }
 
 Write-Host ""
