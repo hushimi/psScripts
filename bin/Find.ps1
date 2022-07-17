@@ -26,21 +26,27 @@ function Hide-Console{
 # Get files
 $tgtStr = $(Write-Host "File Name??: " -ForeGroundColor Green -NoNewline; Read-Host)
 $files = (Get-ChildItem -Path ".\*" -Filter "*$tgtStr*" -Recurse)
+if ($files.Length -eq 0) {
+    Write-Host "Not found" -ForegroundColor Red
+    exit 
+}
 
-# create form
-$formWidth = 600
+# form setting
+$formWidth = 450
 $formHeight = 400
+$ico = New-Object system.drawing.icon ("$PSScriptRoot\ico\0xf3.ico")
 $form = [System.Windows.Forms.Form]@{
     Size = "$formWidth, $formHeight"
     StartPosition = "centerscreen"
     Font = "Consolas, 9pt"
     Text = "Result"
+    FormBorderStyle = "Fixed3D"
+    Icon = $ico
     BackColor = [System.Drawing.ColorTranslator]::FromHtml("#2a1b2e")
     ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#1adfea")
     AutoScroll = $true
     MaximizeBox = $false
     MinimizeBox = $false
-    #ControlBox = $false
 }
 $form.Add_Load({Hide-Console})
 $form.Add_Closing({Show-Console})
@@ -54,14 +60,14 @@ foreach ($file in $files) {
     $fullPath = $file.FullName
     $fileName = $file.Name
     if (Test-Path -PathType Container -LiteralPath $fullPath) {
-        $fileName = "(Dir)$fileName"
+        $fileName = "[Dir]$fileName"
     }
     
 
     # create parent LinkLabel
     $parentLabel = [System.Windows.Forms.LinkLabel]@{
         Location = "24, $yAxis"
-        Text = "Parent: $parentName"
+        Text = "[Parent] $parentName"
         TextAlign = "MiddleLeft"
         LinkColor = [System.Drawing.ColorTranslator]::FromHtml("#1adfea")
         AutoSize = $true

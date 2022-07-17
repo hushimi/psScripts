@@ -35,7 +35,7 @@ function prompt {
     if ($cuFolder -like '*:*') {
         Write-Host " $cuFolder " -ForegroundColor Cyan -NoNewline
     } else {
-        Write-Host ".\$cuFolder\ " -ForegroundColor Cyan -NoNewline
+        Write-Host "[$cuFolder] " -ForegroundColor Cyan -NoNewline
     }
 
     Write-Host " $cuTime `r`n" -ForegroundColor Red -NoNewline
